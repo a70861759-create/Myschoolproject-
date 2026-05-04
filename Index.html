@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --glass: rgba(255, 255, 255, 0.2);
+            --shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            perspective: 1000px; /* Essential for 3D effects */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 3D Floating Header */
+        .header-3d {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transform: translateZ(20px);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .header-3d:hover {
+            transform: translateZ(40px) rotateX(2deg);
+        }
+
+        /* Image Placeholder with Depth */
+        .image-container {
+            width: 100%;
+            height: 300px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed #bbb;
+            color: #666;
+            box-shadow: inset 5px 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        /* Grid for School Features */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* 3D Cards */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        h1 { color: #1a365d; margin: 0; font-size: 2.5rem; }
+        p { color: #4a5568; line-height: 1.6; }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header-3d">
+            <h1>Horizon Academy</h1>
+            <p>Empowering the leaders of tomorrow with innovation and excellence.</p>
+            <div class="image-container">
+                [Place School Banner Image Here]
+            </div>
+        </header>
+
+        <!-- Features Section -->
+        <div class="grid">
+            <div class="card" onclick="effect(this)">
+                <h3>STEM Programs</h3>
+                <div class="image-container" style="height: 150px;">
+                    [Lab Image]
+                </div>
+                <p>Advanced robotics and coding labs for all grade levels.</p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+
+            <div class="card" onclick="effect(this)">
+                <h3>Athletics</h3>
+                <div class="image-container" style="height: 150px;">
+                    [Sports Image]
+                </div>
+                <p>State-of-the-art facilities and championship-winning teams.</p>
+                <a href="#" class="btn">View Teams</a>
+            </div>
+
+            <div class="card" onclick="effect(this)">
+                <h3>Arts & Music</h3>
+                <div class="image-container" style="height: 150px;">
+                    [Art Image]
+                </div>
+                <p>Nurturing creativity through professional studio guidance.</p>
+                <a href="#" class="btn">Explore Gallery</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Subtle Mouse-Follow Effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            // Apply slight tilt to the header based on mouse position
+            const header = document.querySelector('.header-3d');
+            header.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        function effect(el) {
+            el.style.backgroundColor = "#f0f7ff";
+            setTimeout(() => el.style.backgroundColor = "white", 500);
+        }
+    </script>
+</body>
+</html>
